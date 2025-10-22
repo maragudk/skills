@@ -1,6 +1,6 @@
 ---
 name: go
-description: Guide for how to develop Go apps and modules/libraries.
+description: Guide for how to develop Go apps and modules/libraries. Always use this skill when reading or writing Go code.
 license: MIT
 ---
 

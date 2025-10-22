@@ -1,6 +1,6 @@
 ---
 name: journal
-description: How to use your own personal journal
+description: Guide for using the AI's persistent journal database
 license: MIT
 ---
 
