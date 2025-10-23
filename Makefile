@@ -1,6 +1,6 @@
 .PHONY: deploy
 
-SKILL_DIRS := $(shell find . -maxdepth 1 -type d -not -name '.' -not -name '.*' -exec basename {} \;)
+SKILL_DIRS := $(shell find . -maxdepth 1 -type d -not -name '.' -not -name '.*' -not -name 'docs' -exec basename {} \;)
 TARGET_DIR := $(HOME)/.claude/skills
 
 deploy:
