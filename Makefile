@@ -8,15 +8,16 @@ deploy:
 	@for skill in $(SKILL_DIRS); do \
 		echo "Processing $$skill..."; \
 		mkdir -p "$(TARGET_DIR)/$$skill"; \
-		for file in $$skill/*; do \
-			if [ -f "$$file" ]; then \
-				target="$(TARGET_DIR)/$$file"; \
-				if [ -e "$$target" ] || [ -L "$$target" ]; then \
-					rm "$$target"; \
-				fi; \
-				ln -s "$(CURDIR)/$$file" "$$target"; \
-				echo "  Symlinked $$file -> $$target"; \
+		find "$$skill" -type f | while read -r file; do \
+			relative_path=$${file#$$skill/}; \
+			target_file="$(TARGET_DIR)/$$skill/$$relative_path"; \
+			target_dir=$$(dirname "$$target_file"); \
+			mkdir -p "$$target_dir"; \
+			if [ -e "$$target_file" ] || [ -L "$$target_file" ]; then \
+				rm "$$target_file"; \
 			fi; \
+			ln -s "$(CURDIR)/$$file" "$$target_file"; \
+			echo "  Symlinked $$file -> $$target_file"; \
 		done; \
 	done
 	@echo "Deployment complete!"
