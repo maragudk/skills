@@ -1,6 +1,7 @@
 ---
 name: decisions
 description: Guide for recording significant architectural and design decisions in docs/decisions.md. Use this skill when clearly significant architectural decisions are made (database choices, frameworks, core design patterns) or when explicitly asked to document a decision. Be conservative - only suggest for major decisions, not minor implementation details.
+license: MIT
 ---
 
 # Decisions
