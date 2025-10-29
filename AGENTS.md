@@ -30,6 +30,13 @@ I don't like microservice-oriented architectures, preferring a more monolithic a
 
 I prefer lightweight web apps with server-side rendered HTML and HTMX/Datastar for interactivity. I've built gomponents, a pure Go HTML component library.
 
+## Skills Repository
+
+When creating a new skill in this repository:
+- Always update the README.md to add the new skill to the "Available Skills" section
+- Keep the list in alphabetical order
+- Follow the existing format: `**skill-name** - Brief description of what the skill does`
+
 ## Learning and Memory Management
 
 - You must use the journal skill frequently to capture technical insights, failed approaches, and user preferences

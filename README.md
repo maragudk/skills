@@ -15,6 +15,7 @@ Made with ✨sparkles✨ by [maragu](https://www.maragu.dev/): independent softw
 - **decisions** - Guide for recording significant architectural and design decisions in `docs/decisions.md`
 - **git** - Guide for using git according to preferences (branch naming, commit messages, issue references)
 - **go** - Guide for developing Go apps and modules/libraries (code style, testing, dependency injection, package structure)
+- **gomponents** - Guide for working with gomponents, a pure Go HTML component library for building HTML views
 - **journal** - Guide for using the AI's persistent journal database to capture insights and lessons learned
 - **nanobanana** - Guide for generating and editing images using generative AI with the nanobanana CLI
 - **skill-creator** - Guide for creating effective skills that extend AI capabilities with specialized knowledge and workflows
