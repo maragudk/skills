@@ -10,6 +10,14 @@ This is a guide for generating and editing images using the nanobanana CLI tool.
 
 Nanobanana is a command-line interface for the Nano Banana image generation API, which uses Google's generative AI models.
 
+## Installation
+
+If the nanobanana CLI is not already installed, install it using:
+
+```bash
+go install maragu.dev/nanobanana@latest
+```
+
 ## Prerequisites
 
 The `GOOGLE_API_KEY` environment variable must be set, or a `.env` file with the key must be present in the working directory.
