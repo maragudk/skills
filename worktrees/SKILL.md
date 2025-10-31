@@ -43,13 +43,23 @@ Change the working directory to the newly created worktree:
 cd .worktrees/<branch-name>
 ```
 
-### 4. Work in Isolation
+### 4. Copy Environment Files
+
+Before starting the application in the worktree, copy any `.env*` files from the main working directory:
+
+```bash
+cp ../../.env* .
+```
+
+This ensures the worktree has the necessary environment configuration to run the application. Environment files are typically gitignored and won't be available in the new worktree otherwise.
+
+### 5. Work in Isolation
 
 Proceed with development tasks in the worktree. This environment is completely isolated from the main working directory, allowing independent work without interference.
 
 All standard git operations (commit, push, pull, etc.) work normally within the worktree.
 
-### 5. List Active Worktrees (Optional)
+### 6. List Active Worktrees (Optional)
 
 To view all active worktrees:
 
