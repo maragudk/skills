@@ -37,7 +37,8 @@ Allocate 4 available ports for the following services:
 Use the provided script to find 4 available ports starting from **9090**:
 
 ```bash
-# Run the port allocation script (assuming it's accessible in PATH or from the skill directory)
+# Run the port allocation script from the worktrees skill
+# Note: This script is located in the worktrees skill directory, not in the project repo
 ports=($(bash scripts/allocate-ports.sh))
 
 # Assign ports to variables (using 1-based indexing for zsh compatibility)
@@ -50,6 +51,7 @@ MINIO_TEST_PORT=${ports[4]}
 **Important:**
 - Ports don't need to be consecutive - the script finds the next available port until it has 4
 - The array uses 1-based indexing (zsh style) for compatibility
+- The `scripts/` directory is part of the worktrees skill, not your project repository
 
 ### Update .env File
 
@@ -120,32 +122,18 @@ Report back to the user with:
 
 ## Stopping Services
 
-When stopping work in a worktree or cleaning up:
-
-### 1. Stop docker-compose Services
+When stopping work in a worktree or cleaning up, use the shutdown script:
 
 ```bash
 cd .worktrees/<branch-name>
-docker compose down
+bash scripts/shutdown-services.sh
 ```
 
-This stops and removes the MinIO containers for that worktree.
+**Note:** The `scripts/` directory is part of the worktrees skill, not your project repository.
 
-### 2. Stop watch.sh and Tailwind CSS processes
-
-Find and stop the processes running in this specific worktree by port:
-
-```bash
-# Get the port from .env
-SERVER_PORT=$(grep "^SERVER_ADDRESS=" .env | cut -d: -f2)
-
-# Kill processes by port (this is worktree-specific)
-kill $(lsof -ti:${SERVER_PORT}) 2>/dev/null || true
-
-# Alternative: kill by worktree path
-pkill -f "watch.sh.*$(basename $(pwd))" || true
-pkill -f "tailwindcss.*$(basename $(pwd))" || true
-```
+This script will:
+1. Stop and remove docker compose services (if docker-compose.yml exists)
+2. Stop the app server process by port (if .env exists)
 
 ## Port Tracking
 
@@ -196,8 +184,6 @@ echo "Services started successfully"
 
 # Later: Stop services
 cd .worktrees/feature-auth
-docker compose down
-SERVER_PORT=$(grep "^SERVER_ADDRESS=" .env | cut -d: -f2)
-kill $(lsof -ti:${SERVER_PORT}) 2>/dev/null || true
+bash scripts/shutdown-services.sh
 cd ../..
 ```
