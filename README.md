@@ -18,5 +18,6 @@ Made with ✨sparkles✨ by [maragu](https://www.maragu.dev/): independent softw
 - **gomponents** - Guide for working with gomponents, a pure Go HTML component library for building HTML views
 - **journal** - Guide for using the AI's persistent journal database to capture insights and lessons learned
 - **nanobanana** - Guide for generating and editing images using generative AI with the nanobanana CLI
+- **save-web-page** - Guide for saving a web page for offline use using the [monolith CLI](https://github.com/Y2Z/monolith)
 - **skill-creator** - Guide for creating effective skills that extend AI capabilities with specialized knowledge and workflows
 - **worktrees** - Guide for using git worktrees to parallelize development with coding agents in isolated environments
