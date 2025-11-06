@@ -171,22 +171,22 @@ Every time the `postgrestest.NewDatabase(t)`/`sqlitetest.NewDatabase(t)` test he
 
 You can use database fixtures for tests. Prefer these for test data setups when multiple tests rely on the same or very similar data, so that every test doesn't have to set up the same data. They are in `sqlite/testdata/fixtures`/`postgres/testdata/fixtures`. Use them with `sqlitetest.NewDatabase(t, sqlitetest.WithFixtures("fixture one", "fixture two"))`. They are applied in the order given.
 
+Test helper functions should call `testing.T.Helper()`.
+
+In tests, use `t.Context()` instead of `context.Background()`, and always use it inline instead of pulling out into a `ctx` variable.
+
 ### Miscellaneous
 
 - Variable naming:
   - `req` for requests, `res` for responses
-- Prefer lowercase SQL queries
 - There are SQL helpers available, at `Database.H.Select`, `Database.H.Exec`, `Database.H.Get`, `Database.H.InTx`.
 - Use the `any` builtin in Go instead of `interface{}`
 - There's an alias for `sql.ErrNoRows` from stdlib at `maragu.dev/glue/sql.ErrNoRows`, so you don't have to import both
-- In tests, use `t.Context()` instead of `context.Background()`
-- Test helper functions should call `testing.T.Helper()`
 - All HTML buttons need the `cursor-pointer` CSS class
-- SQLite time format is always a string returned by `strftime('%Y-%m-%dT%H:%M:%fZ')`
+- SQLite time format is always a string returned by `strftime('%Y-%m-%dT%H:%M:%fZ')`. Use `maragu.dev/glue/model.Time` (usually aliased in `model.Time` in the project) instead of stdlib `time.Time` when working with the database.
 - Remember that private functions in Go are package-level, so you can use them across files in the same package
-- Lowercase the beginning of HTML component names unless they need to be used by an HTTP handler outside the package
-- Documentation should follow the Go style of having the identifier name be the first word of the sentence, and then completing the sentence without repeating itself. Example: "// SearchProducts using the given search query and result limit." NOT: "// SearchProducts searches products using the given search query and result label."
-- Package-level identifiers should begin with lowercase by default, i.e. have package-level visibility, to make the API surface area towards other packages smaller. In particular, HTML components should be internal to the package unless needed by an HTTP handler.
+- Documentation must follow the Go style of having the identifier name be the first word of the sentence, and then completing the sentence without repeating itself. Example: "// SearchProducts using the given search query and result limit." NOT: "// SearchProducts searches products using the given search query and result label."
+- Package-level identifiers must begin with lowercase by default, i.e. have package-level visibility, to make the API surface area towards other packages smaller.
 
 ## Testing, linting, evals
 
@@ -199,14 +199,6 @@ Run `make eval` or `go test -shuffle on -run TestEval ./...` to run LLM evals.
 Run `make fmt` to format all code in the project, which is useful as a last finishing touch.
 
 You can access the database by using `psql` or `sqlite3` in the shell.
-
-## Version control
-
-When writing commit messages, surround identifier names (variable names, type names, etc.) in backticks. Include the package name when refering to indentifiers. Example: `model.User`.
-
-## Bugs
-
-If you think you've found a bug during testing, ask me what to do, instead of trying to work around the bug in tests.
 
 ## Documentation
 
