@@ -42,16 +42,6 @@ nanobanana generate -pro output.png "a beautiful sunset over mountains"
 
 The `-pro` flag enables Google's premium generative AI model, which typically produces higher quality results but may take slightly longer to generate.
 
-## Generating multiple variations
-
-To generate multiple variations of an image:
-
-```bash
-nanobanana generate -count 3 output.png "abstract art with vibrant colors"
-```
-
-When generating multiple images, the output filename will be modified to include a number suffix (e.g., `output-1.png`, `output-2.png`, `output-3.png`).
-
 ## Editing existing images
 
 To edit or modify an existing image using a text prompt:
@@ -84,9 +74,4 @@ nanobanana generate concept.png "futuristic city skyline at night with neon ligh
 Edit an existing photo:
 ```bash
 nanobanana generate -i photo.png enhanced.png "enhance the colors and make it look like golden hour"
-```
-
-Generate multiple options:
-```bash
-nanobanana generate -count 5 icon.png "simple icon of a banana, flat design, yellow and white"
 ```
