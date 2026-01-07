@@ -10,6 +10,7 @@ Made with ✨sparkles✨ by [maragu](https://www.maragu.dev/): independent softw
 
 ## Available Skills
 
+- **bluesky** - Guide for posting content to the Bluesky social network using the bsky terminal app
 - **brainstorm** - Guide for brainstorming ideas and turning them into fully formed designs through iterative questioning
 - **code-review** - Guide for making code reviews using competing agents to find architecture and implementation issues
 - **decisions** - Guide for recording significant architectural and design decisions in `docs/decisions.md`
