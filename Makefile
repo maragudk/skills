@@ -20,4 +20,10 @@ deploy:
 			echo "  Symlinked $$file -> $$target_file"; \
 		done; \
 	done
+	@echo "Deploying AGENTS.md to $(HOME)/.claude/CLAUDE.md..."
+	@if [ -e "$(HOME)/.claude/CLAUDE.md" ] || [ -L "$(HOME)/.claude/CLAUDE.md" ]; then \
+		rm "$(HOME)/.claude/CLAUDE.md"; \
+	fi
+	@ln -s "$(CURDIR)/AGENTS.md" "$(HOME)/.claude/CLAUDE.md"
+	@echo "  Symlinked AGENTS.md -> $(HOME)/.claude/CLAUDE.md"
 	@echo "Deployment complete!"
