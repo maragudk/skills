@@ -1,16 +1,19 @@
-.PHONY: deploy
+.PHONY: deploy deploy-claude deploy-codex
 
 SKILL_DIRS := $(shell find . -maxdepth 1 -type d -not -name '.' -not -name '.*' -not -name 'docs' -exec basename {} \;)
-TARGET_DIR := $(HOME)/.claude/skills
+CLAUDE_TARGET := $(HOME)/.claude/skills
+CLAUDE_AGENTS := $(HOME)/.claude/CLAUDE.md
+CODEX_TARGET := $(HOME)/.codex/skills
+CODEX_AGENTS := $(HOME)/.codex/AGENTS.md
 
-deploy:
-	@echo "Deploying skills to $(TARGET_DIR)..."
+define deploy_skills
+	@echo "Deploying skills to $(1)..."
 	@for skill in $(SKILL_DIRS); do \
 		echo "Processing $$skill..."; \
-		mkdir -p "$(TARGET_DIR)/$$skill"; \
+		mkdir -p "$(1)/$$skill"; \
 		find "$$skill" -type f | while read -r file; do \
 			relative_path=$${file#$$skill/}; \
-			target_file="$(TARGET_DIR)/$$skill/$$relative_path"; \
+			target_file="$(1)/$$skill/$$relative_path"; \
 			target_dir=$$(dirname "$$target_file"); \
 			mkdir -p "$$target_dir"; \
 			if [ -e "$$target_file" ] || [ -L "$$target_file" ]; then \
@@ -20,10 +23,25 @@ deploy:
 			echo "  Symlinked $$file -> $$target_file"; \
 		done; \
 	done
-	@echo "Deploying AGENTS.md to $(HOME)/.claude/CLAUDE.md..."
-	@if [ -e "$(HOME)/.claude/CLAUDE.md" ] || [ -L "$(HOME)/.claude/CLAUDE.md" ]; then \
-		rm "$(HOME)/.claude/CLAUDE.md"; \
+	@echo "Skill deployment complete!"
+endef
+
+define deploy_agents
+	@echo "Deploying AGENTS.md to $(1)..."
+	@if [ -e "$(1)" ] || [ -L "$(1)" ]; then \
+		rm "$(1)"; \
 	fi
-	@ln -s "$(CURDIR)/AGENTS.md" "$(HOME)/.claude/CLAUDE.md"
-	@echo "  Symlinked AGENTS.md -> $(HOME)/.claude/CLAUDE.md"
+	@ln -s "$(CURDIR)/AGENTS.md" "$(1)"
+	@echo "  Symlinked AGENTS.md -> $(1)"
+endef
+
+deploy: deploy-claude deploy-codex
 	@echo "Deployment complete!"
+
+deploy-claude:
+	$(call deploy_skills,$(CLAUDE_TARGET))
+	$(call deploy_agents,$(CLAUDE_AGENTS))
+
+deploy-codex:
+	$(call deploy_skills,$(CODEX_TARGET))
+	$(call deploy_agents,$(CODEX_AGENTS))

@@ -22,3 +22,11 @@ Made with ✨sparkles✨ by [maragu](https://www.maragu.dev/): independent softw
 - **save-web-page** - Guide for saving a web page for offline use using the [monolith CLI](https://github.com/Y2Z/monolith)
 - **skill-creator** - Guide for creating effective skills that extend AI capabilities with specialized knowledge and workflows
 - **worktrees** - Guide for using git worktrees to parallelize development with coding agents in isolated environments
+
+## Deployment
+
+Use the provided Makefile to symlink every skill into both the Claude Code and Codex skill directories:
+
+- `make deploy` – deploys to both agents (`~/.claude/skills` and `~/.codex/skills`) and refreshes the corresponding instruction files
+- `make deploy-claude` – only refresh Claude Code's skills plus `~/.claude/CLAUDE.md`
+- `make deploy-codex` – only refresh Codex's skills plus `~/.codex/AGENTS.md`
