@@ -13,6 +13,7 @@ Made with ✨sparkles✨ by [maragu](https://www.maragu.dev/): independent softw
 - **bluesky** - Guide for posting content to the Bluesky social network using the bsky terminal app
 - **brainstorm** - Guide for brainstorming ideas and turning them into fully formed designs through iterative questioning
 - **code-review** - Guide for making code reviews using competing agents to find architecture and implementation issues
+- **collaboration** - Guide for collaborating on code in open source projects (forking, PRs, reviews, issues)
 - **decisions** - Guide for recording significant architectural and design decisions in `docs/decisions.md`
 - **git** - Guide for using git according to preferences (branch naming, commit messages, issue references)
 - **go** - Guide for developing Go apps and modules/libraries (code style, testing, dependency injection, package structure)
