@@ -15,119 +15,53 @@ marimo is an open-source reactive Python notebook that reinvents notebooks as re
 - Run as scripts or deploy as web apps
 - Prevent bugs through automatic dependency tracking
 
-## When to Use This Skill
-
-Use this skill when:
-- Creating or editing marimo notebooks
-- Running notebooks as apps or scripts
-- Converting Jupyter notebooks to marimo
-- Working with interactive UI elements in Python
-- Deploying Python notebooks as web applications
-
 ## Installation
 
 ```bash
-# Basic installation
-pip install marimo
+pip install marimo                    # Basic
+pip install marimo[recommended]       # With extras
+pip install marimo[sql]               # With SQL support
 
-# With recommended extras (SQL, plotting, etc.)
-pip install marimo[recommended]
-
-# With SQL support
-pip install marimo[sql]
-```
-
-Start the introductory tutorial:
-
-```bash
-marimo tutorial intro
+marimo tutorial intro                 # Start tutorial
 ```
 
 ## CLI Commands
 
-### Create and Edit Notebooks
-
 ```bash
-marimo edit                      # Create new notebook
-marimo edit notebook.py          # Edit existing notebook
-marimo edit --port 8080          # Custom port
-marimo edit --headless           # No browser auto-open
-marimo edit --watch              # Auto-reload on file changes
-marimo edit --sandbox            # Isolate dependencies per notebook
-```
+# Edit
+marimo edit                           # New notebook
+marimo edit notebook.py               # Edit existing
+marimo edit --watch --sandbox         # Watch files, isolate deps
 
-### Run as Web App
+# Run as app
+marimo run notebook.py                # Read-only app
+marimo run notebook.py --watch        # Auto-reload on changes
 
-```bash
-marimo run notebook.py           # Run as read-only app
-marimo run notebook.py --port 8080
-marimo run notebook.py --include-code  # Show source code
-marimo run notebook.py --watch         # Auto-reload on file changes
-marimo run notebook.py --sandbox       # Isolate dependencies per notebook
-```
+# Run as script
+python notebook.py
 
-### Run as Script
+# Create from prompt
+marimo new "analyze sales data"
 
-```bash
-python notebook.py               # Execute directly as Python
-```
+# Convert
+marimo convert notebook.ipynb -o notebook.py
 
-### Create from AI Prompt
-
-```bash
-marimo new "analyze sales data"  # Generate notebook from prompt
-marimo new prompt.txt            # Use prompt from file
-```
-
-### Convert from Other Formats
-
-```bash
-marimo convert notebook.ipynb -o notebook.py  # From Jupyter
-marimo convert document.md -o notebook.py     # From Markdown
-marimo convert script.py -o notebook.py       # From Python script
-```
-
-### Export to Other Formats
-
-```bash
-marimo export html notebook.py -o output.html     # Static HTML
+# Export
+marimo export html notebook.py -o output.html
 marimo export html-wasm notebook.py -o output.html  # Browser-executable
-marimo export ipynb notebook.py -o output.ipynb   # Jupyter notebook
-marimo export md notebook.py -o output.md         # Markdown
-marimo export script notebook.py -o script.py     # Flat Python script
-```
-
-### Utilities
-
-```bash
-marimo check notebook.py         # Validate and lint
-marimo check --fix notebook.py   # Auto-fix issues
-marimo env                       # Show environment info
-marimo recover notebook.json     # Recover from JSON backup
 ```
 
 ## Key Concepts
 
 ### Reactivity
 
-marimo notebooks are reactive: running a cell automatically runs all cells that depend on it. The execution order is determined by variable dependencies (DAG), not cell position.
-
-```python
-# Cell 1
-x = 10
-
-# Cell 2 - automatically re-runs when x changes
-y = x * 2
-
-# Cell 3 - automatically re-runs when y changes
-print(f"Result: {y}")
-```
+Running a cell automatically runs all cells that depend on it. Execution order is determined by variable dependencies (DAG), not cell position.
 
 ### Cell Rules
 
-1. **One definition per variable**: Each global variable must be defined in exactly one cell
-2. **No mutation tracking**: Mutations like `list.append()` aren't tracked; reassign instead
-3. **Declare and mutate together**: If mutating is needed, do it in the same cell as the declaration
+1. Each global variable must be defined in exactly one cell
+2. Mutations like `list.append()` aren't tracked; reassign instead
+3. If mutating is needed, do it in the same cell as the declaration
 
 ### File Format
 
@@ -135,8 +69,6 @@ Notebooks are pure Python files with marimo decorators:
 
 ```python
 import marimo
-
-__generated_with = "0.10.0"
 app = marimo.App()
 
 @app.cell
@@ -148,329 +80,106 @@ def _():
 def _(mo):
     mo.md("# My Notebook")
     return ()
-
-@app.cell
-def _():
-    x = 42
-    return (x,)
-
-if __name__ == "__main__":
-    app.run()
 ```
 
-## Core API
+## API Reference
 
-### Markdown
+Detailed documentation for each API is available in the `references/` directory. Consult these files for comprehensive examples and parameters.
+
+### Core
+
+| API | Reference File | Description |
+|-----|----------------|-------------|
+| Markdown | `references/markdown.md` | `mo.md()` for rich text, LaTeX, icons |
+| HTML | `references/html.md` | `mo.Html`, `mo.as_html()`, styling |
+| Outputs | `references/outputs.md` | `mo.output.append()`, console redirection |
+
+### UI Elements
+
+| API | Reference File | Description |
+|-----|----------------|-------------|
+| Inputs | `references/inputs.md` | Sliders, text, dropdowns, tables, forms, etc. |
+| Layouts | `references/layouts.md` | `mo.hstack`, `mo.vstack`, tabs, accordion, etc. |
+| Media | `references/media.md` | Images, audio, video, PDF, downloads |
+| Plotting | `references/plotting.md` | Altair, Plotly, matplotlib integration |
+| Diagrams | `references/diagrams.md` | Mermaid diagrams |
+| Status | `references/status.md` | Progress bars, spinners |
+
+### Data
+
+| API | Reference File | Description |
+|-----|----------------|-------------|
+| SQL | `references/sql.md` | `mo.sql()` for database and DataFrame queries |
+
+### Advanced
+
+| API | Reference File | Description |
+|-----|----------------|-------------|
+| Control Flow | `references/control-flow.md` | `mo.stop()`, conditional execution |
+| State | `references/state.md` | `mo.state()` for UI synchronization |
+| Caching | `references/caching.md` | `@mo.cache`, `@mo.persistent_cache` |
+| Query Params | `references/query-params.md` | `mo.query_params()` for URL state |
+| CLI Args | `references/cli-args.md` | `mo.cli_args()` for script arguments |
+| Watch | `references/watch.md` | `mo.watch.file()` for reactive file monitoring |
+| App | `references/app.md` | Embedding notebooks, `mo.app_meta()` |
+| Cell | `references/cell.md` | Cross-notebook execution, testing |
+
+## Quick Examples
+
+### Basic UI
 
 ```python
 import marimo as mo
 
-mo.md("# Heading")
-mo.md(f"Value is **{x}**")  # Interpolation supported
+slider = mo.ui.slider(0, 100, value=50, label="Threshold")
+slider
+
+# In another cell
+mo.md(f"Selected value: **{slider.value}**")
 ```
 
-### UI Elements
-
-All UI elements are in `mo.ui`:
+### Interactive Table
 
 ```python
-# Sliders and numbers
-slider = mo.ui.slider(0, 100, value=50, label="Value")
-number = mo.ui.number(0, 100, value=50)
+table = mo.ui.table(df, selection="multi")
+table
 
-# Text inputs
-text = mo.ui.text(placeholder="Enter name")
-textarea = mo.ui.text_area(rows=5)
-
-# Selection
-dropdown = mo.ui.dropdown(["A", "B", "C"], value="A")
-radio = mo.ui.radio(["Option 1", "Option 2"])
-checkbox = mo.ui.checkbox(label="Enable feature")
-multiselect = mo.ui.multiselect(["A", "B", "C"])
-
-# Dates
-date = mo.ui.date(label="Select date")
-date_range = mo.ui.date_range()
-
-# Files
-file = mo.ui.file(filetypes=[".csv", ".json"])
-file_browser = mo.ui.file_browser(initial_path="./data")
-
-# Tables and data
-table = mo.ui.table(dataframe)
-dataframe_ui = mo.ui.dataframe(df)  # No-code transformations
-data_explorer = mo.ui.data_explorer(df)
-
-# Buttons
-button = mo.ui.button(label="Click me")
-run_button = mo.ui.run_button(label="Run")
-refresh = mo.ui.refresh(interval=5)
-
-# Advanced
-code_editor = mo.ui.code_editor(language="python")
-chat = mo.ui.chat(model)
+# In another cell
+selected = table.value  # Selected rows as DataFrame
 ```
 
-Access values with `.value`:
+### SQL Query
 
 ```python
-slider = mo.ui.slider(0, 100)
-# In another cell:
-result = slider.value * 2
-```
-
-### Layouts
-
-```python
-# Horizontal/vertical stacks
-mo.hstack([element1, element2])
-mo.vstack([element1, element2])
-
-# Tabs
-mo.ui.tabs({"Tab 1": content1, "Tab 2": content2})
-
-# Accordion
-mo.accordion({"Section 1": content1, "Section 2": content2})
-
-# Callouts
-mo.callout("Important note", kind="info")  # info, warn, danger, success
-
-# Sidebar
-mo.sidebar([element1, element2])
-```
-
-### SQL
-
-SQL cells integrate with the reactive system:
-
-```python
-# Query a dataframe directly
 result = mo.sql(f"SELECT * FROM {df} WHERE value > {threshold.value}")
-
-# With database connection
-mo.sql(f"SELECT * FROM users LIMIT 10", engine=connection)
 ```
 
-Supported databases: PostgreSQL, MySQL, SQLite, DuckDB, Snowflake, BigQuery.
-
-### State Management
-
-For advanced use cases (rarely needed):
+### Conditional Execution
 
 ```python
-get_count, set_count = mo.state(0)
-
-# In another cell
-button = mo.ui.button(label="Increment", on_change=lambda _: set_count(get_count() + 1))
-
-# In another cell
-mo.md(f"Count: {get_count()}")
-```
-
-### Control Flow
-
-```python
-# Stop cell execution conditionally
-mo.stop(not data_loaded, mo.md("Loading data..."))
-
-# The rest of the cell only runs if data_loaded is True
-process(data)
-```
-
-### Caching
-
-```python
-@mo.cache
-def expensive_computation(x):
-    # Result cached based on input
-    return heavy_processing(x)
-
-# Disk-based caching
-@mo.persistent_cache
-def very_expensive(x):
-    return process(x)
-```
-
-### Media
-
-```python
-# Images
-mo.image(src="path/to/image.png", alt="Description")
-mo.image(src=bytes_data)  # From bytes
-
-# Audio and video
-mo.audio(src="audio.mp3")
-mo.video(src="video.mp4")
-
-# PDF display
-mo.pdf(src="document.pdf")
-
-# Download link
-mo.download(data=bytes_or_file, filename="export.csv")
-
-# Plain text (preserves whitespace)
-mo.plain_text("Preformatted text")
-```
-
-### Diagrams
-
-```python
-# Mermaid diagrams
-mo.mermaid("""
-graph TD
-    A[Start] --> B[Process]
-    B --> C[End]
-""")
-
-# Statistic cards
-mo.stat(value="$1,234", label="Revenue", direction="increase")
-```
-
-### Status and Progress
-
-```python
-# Progress bar
-with mo.status.progress_bar(total=100) as bar:
-    for i in range(100):
-        bar.update()
-
-# Spinner
-with mo.status.spinner("Loading..."):
-    do_work()
-```
-
-### Query Parameters and CLI Args
-
-```python
-# Access URL query parameters (in app mode)
-params = mo.query_params()
-filter_value = params.get("filter", "default")
-
-# Set query parameters
-mo.query_params.set({"filter": "active"})
-
-# Access CLI arguments (when run as script)
-args = mo.cli_args()
-```
-
-### HTML Manipulation
-
-```python
-# Create HTML elements
-element = mo.Html("<div>Custom HTML</div>")
-
-# Batch multiple elements
-mo.Html.batch([element1, element2])
-
-# Apply CSS styles
-element.style({"color": "red", "font-size": "16px"})
-```
-
-### Watch (File System)
-
-```python
-# React to file changes
-file_content = mo.watch("config.json")
-# Cell re-runs when file changes
+mo.stop(form.value is None, mo.md("Submit the form to continue"))
+# Rest of cell runs only after form submission
 ```
 
 ## Running as Apps
 
-### Layout Options
-
-1. **Vertical (default)**: Outputs stacked vertically, code hidden
-2. **Grid**: Drag-and-drop arrangement via editor
-3. **Slides**: Slideshow presentation mode
-
-Configure in the editor's layout settings. Layout metadata saves to a `layouts/` folder.
-
-### Deployment
-
 ```bash
-# Local web app
-marimo run notebook.py
-
-# Export static HTML
-marimo export html notebook.py -o app.html
-
-# Browser-executable (WASM)
-marimo export html-wasm notebook.py -o app.html
+marimo run notebook.py                    # Local app
+marimo export html-wasm notebook.py       # Static WASM app
 ```
 
-For production deployments, use Docker, Kubernetes, or cloud platforms. The `marimo run` command can be containerized with standard Python Docker images.
-
-## WASM Notebooks
-
-marimo notebooks can run entirely in the browser using WebAssembly:
-
-- No server required
-- Deploy as static HTML files
-- Works on GitHub Pages
-- 2GB memory limit
-- Most pure Python packages supported (NumPy, pandas, scikit-learn, matplotlib, DuckDB, Polars)
-
-```bash
-marimo export html-wasm notebook.py -o index.html
-```
+Layout options: Vertical (default), Grid (drag-drop in editor), Slides.
 
 ## Best Practices
 
-### Code Organization
-
-- Minimize global variables; use functions to encapsulate logic
-- Prefix intermediate variables with underscore (`_temp`)
-- Extract complex logic into separate Python modules
-- Organize freely—cell position doesn't affect execution order
-
-### Reactivity
-
-- Declare and mutate variables in the same cell
-- Create new objects instead of mutating existing ones across cells
-- Avoid `on_change` handlers; let reactivity handle updates
-- Use `mo.stop()` to prevent expensive computations until ready
-
-### Performance
-
-- Use lazy runtime mode for expensive computations (via notebook settings)
-- Leverage `@mo.cache` for expensive pure functions
-- Use native DuckDB output for large SQL queries
-- Disable cells temporarily while iterating
-
-### Idempotent Cells
-
-Structure cells so identical inputs produce identical outputs:
-
-```python
-# Good: Pure function
-def process(data):
-    return data.copy().assign(new_col=lambda d: d.value * 2)
-
-result = process(df)
-
-# Avoid: In-place mutation
-df["new_col"] = df["value"] * 2  # Mutation not tracked
-```
-
-## Interactive Charts
-
-marimo integrates with plotting libraries for interactive selections:
-
-```python
-import altair as alt
-
-chart = mo.ui.altair_chart(
-    alt.Chart(df).mark_point().encode(x="x", y="y")
-)
-
-# In another cell - selection is reactive
-selected_data = chart.value
-```
-
-Supported: Altair, Plotly, matplotlib (via mpl interactions).
+- **Reactivity**: Declare and mutate variables in the same cell
+- **Performance**: Use `@mo.cache` for expensive computations
+- **UI Gating**: Use `mo.stop()` to prevent expensive ops until ready
+- **State**: Avoid `mo.state()` unless synchronizing multiple UI elements
+- **Organization**: Cell position doesn't matter; organize for readability
 
 ## Resources
 
 - [Documentation](https://docs.marimo.io/)
-- [GitHub Repository](https://github.com/marimo-team/marimo)
+- [GitHub](https://github.com/marimo-team/marimo)
 - [Examples Gallery](https://marimo.io/gallery)
-- [Discord Community](https://discord.gg/JE7nhX6mD8)
