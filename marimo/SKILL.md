@@ -52,6 +52,8 @@ marimo edit                      # Create new notebook
 marimo edit notebook.py          # Edit existing notebook
 marimo edit --port 8080          # Custom port
 marimo edit --headless           # No browser auto-open
+marimo edit --watch              # Auto-reload on file changes
+marimo edit --sandbox            # Isolate dependencies per notebook
 ```
 
 ### Run as Web App
@@ -60,6 +62,8 @@ marimo edit --headless           # No browser auto-open
 marimo run notebook.py           # Run as read-only app
 marimo run notebook.py --port 8080
 marimo run notebook.py --include-code  # Show source code
+marimo run notebook.py --watch         # Auto-reload on file changes
+marimo run notebook.py --sandbox       # Isolate dependencies per notebook
 ```
 
 ### Run as Script
