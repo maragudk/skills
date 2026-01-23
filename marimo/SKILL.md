@@ -291,6 +291,89 @@ def very_expensive(x):
     return process(x)
 ```
 
+### Media
+
+```python
+# Images
+mo.image(src="path/to/image.png", alt="Description")
+mo.image(src=bytes_data)  # From bytes
+
+# Audio and video
+mo.audio(src="audio.mp3")
+mo.video(src="video.mp4")
+
+# PDF display
+mo.pdf(src="document.pdf")
+
+# Download link
+mo.download(data=bytes_or_file, filename="export.csv")
+
+# Plain text (preserves whitespace)
+mo.plain_text("Preformatted text")
+```
+
+### Diagrams
+
+```python
+# Mermaid diagrams
+mo.mermaid("""
+graph TD
+    A[Start] --> B[Process]
+    B --> C[End]
+""")
+
+# Statistic cards
+mo.stat(value="$1,234", label="Revenue", direction="increase")
+```
+
+### Status and Progress
+
+```python
+# Progress bar
+with mo.status.progress_bar(total=100) as bar:
+    for i in range(100):
+        bar.update()
+
+# Spinner
+with mo.status.spinner("Loading..."):
+    do_work()
+```
+
+### Query Parameters and CLI Args
+
+```python
+# Access URL query parameters (in app mode)
+params = mo.query_params()
+filter_value = params.get("filter", "default")
+
+# Set query parameters
+mo.query_params.set({"filter": "active"})
+
+# Access CLI arguments (when run as script)
+args = mo.cli_args()
+```
+
+### HTML Manipulation
+
+```python
+# Create HTML elements
+element = mo.Html("<div>Custom HTML</div>")
+
+# Batch multiple elements
+mo.Html.batch([element1, element2])
+
+# Apply CSS styles
+element.style({"color": "red", "font-size": "16px"})
+```
+
+### Watch (File System)
+
+```python
+# React to file changes
+file_content = mo.watch("config.json")
+# Cell re-runs when file changes
+```
+
 ## Running as Apps
 
 ### Layout Options
