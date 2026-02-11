@@ -92,10 +92,12 @@ bsky post "Feature demo" \
 
 ### 4. Replying to Posts
 
-Reply to existing posts using the `-r` flag with the post URI or URL:
+Reply to existing posts using the `-r` flag with the AT protocol URI.
+
+**Important:** The `-r` flag does NOT work when passing text as a positional argument -- the CLI treats it as part of the post text. Always use `--stdin` when replying. Also, `-r` requires an AT protocol URI (`at://...`), not a Bluesky web URL.
 
 ```bash
-bsky post "Thanks for sharing!" -r at://did:plc:xyz/app.bsky.feed.post/abc123
+echo "Thanks for sharing!" | bsky post --stdin -r "at://did:plc:xyz/app.bsky.feed.post/abc123"
 ```
 
 ### 5. Quote Posts
@@ -165,8 +167,8 @@ Thanks to everyone in the community for the support and contributions. This woul
 When someone shares or comments on your work, reply directly:
 
 ```bash
-bsky post "Thanks for the detailed feedback! I've opened an issue to track this enhancement." \
-  -r at://did:plc:xyz/app.bsky.feed.post/abc123
+echo "Thanks for the detailed feedback! I've opened an issue to track this enhancement." \
+  | bsky post --stdin -r "at://did:plc:xyz/app.bsky.feed.post/abc123"
 ```
 
 ## Notes
