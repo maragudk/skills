@@ -25,6 +25,7 @@ Made with ✨sparkles✨ by [maragu](https://www.maragu.dev/): independent softw
 - **nanobanana** - Guide for generating and editing images using generative AI with the nanobanana CLI
 - **observable-notebooks** - Guide for creating Observable Notebooks 2.0, the open-source notebook system for interactive data visualization
 - **observable-plot** - Guide for using Observable Plot, a JavaScript library for exploratory data visualization with marks, scales, and transforms
+- **rodney** - Guide for automating Chrome browser interactions using the rodney CLI (navigation, screenshots, form filling, content extraction)
 - **save-web-page** - Guide for saving a web page for offline use using the [monolith CLI](https://github.com/Y2Z/monolith)
 - **skill-creator** - Guide for creating effective skills that extend AI capabilities with specialized knowledge and workflows
 - **worktrees** - Guide for using git worktrees to parallelize development with coding agents in isolated environments
