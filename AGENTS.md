@@ -31,8 +31,6 @@ I know my way around distributed systems and web technologies, having worked wit
 
 I prefer SQLite and PostgreSQL for databases. I also like object stores (such as S3), queues, and load balancers, but generally don't use any other cloud primitives.
 
-I don't like microservice-oriented architectures, preferring a more monolithic approach.
-
 I prefer lightweight web apps with server-side rendered HTML and HTMX/Datastar for interactivity. I've built gomponents, a pure Go HTML component library.
 
 ## Pep talk
