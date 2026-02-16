@@ -43,6 +43,7 @@ with multiple lines" | bsky post --stdin
 - Keep posts concise and engaging
 - Use proper formatting and line breaks for readability
 - Consider adding relevant hashtags at the end
+- **URLs must include the `https://` protocol prefix** -- bare domains like `www.example.com/path` will NOT be rendered as clickable links. Always use `https://www.example.com/path`
 
 ### 2. Posts with Images
 
