@@ -28,6 +28,7 @@ Made with ✨sparkles✨ by [maragu](https://www.maragu.dev/): independent softw
 - **rodney** - Guide for automating Chrome browser interactions using the rodney CLI (navigation, screenshots, form filling, content extraction)
 - **save-web-page** - Guide for saving a web page for offline use using the [monolith CLI](https://github.com/Y2Z/monolith)
 - **skill-creator** - Guide for creating effective skills that extend AI capabilities with specialized knowledge and workflows
+- **trace-annotation-tool** - Build custom HTML/JS trace annotation tools for open coding during LLM error analysis
 - **worktrees** - Guide for using git worktrees to parallelize development with coding agents in isolated environments
 
 ## Deployment
