@@ -17,6 +17,7 @@ Made with ✨sparkles✨ by [maragu](https://www.maragu.dev/): independent softw
 - **datastar** - Guide for building interactive web UIs with Datastar and gomponents-datastar
 - **decisions** - Guide for recording significant architectural and design decisions in `docs/decisions.md`
 - **design-doc** - Guide for writing design documents and specifications, especially after brainstorm or feature design sessions
+- **failure-taxonomy** - Build a structured taxonomy of failure modes from open-coded trace annotations using axial coding
 - **git** - Guide for using git according to preferences (branch naming, commit messages, issue references)
 - **go** - Guide for developing Go apps and modules/libraries (code style, testing, dependency injection, package structure)
 - **gomponents** - Guide for working with gomponents, a pure Go HTML component library for building HTML views
