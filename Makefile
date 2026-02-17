@@ -1,4 +1,4 @@
-.PHONY: deploy deploy-claude deploy-codex
+.PHONY: deploy deploy-claude deploy-codex sync-skill-creator
 
 SKILL_DIRS := $(shell find . -maxdepth 1 -type d -not -name '.' -not -name '.*' -not -name 'docs' -exec basename {} \;)
 CLAUDE_TARGET := $(HOME)/.claude/skills
@@ -45,3 +45,19 @@ deploy-claude:
 deploy-codex:
 	$(call deploy_skills,$(CODEX_TARGET))
 	$(call deploy_agents,$(CODEX_AGENTS))
+
+# Sync skill-creator from upstream anthropics/skills repo, overwriting local changes.
+sync-skill-creator:
+	@echo "Syncing skill-creator from anthropics/skills..."
+	@rm -rf skill-creator
+	@mkdir -p skill-creator
+	@gh api repos/anthropics/skills/git/trees/main?recursive=1 --jq \
+		'.tree[] | select(.path | startswith("skills/skill-creator/")) | select(.type == "blob") | .path' | \
+		while read -r path; do \
+			relative=$${path#skills/skill-creator/}; \
+			mkdir -p "$$(dirname "skill-creator/$$relative")"; \
+			curl -sL "https://raw.githubusercontent.com/anthropics/skills/main/$$path" \
+				-o "skill-creator/$$relative"; \
+			echo "  Downloaded $$relative"; \
+		done
+	@echo "skill-creator synced!"
