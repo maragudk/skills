@@ -8,6 +8,14 @@ Made with ✨sparkles✨ by [maragu](https://www.maragu.dev/): independent softw
 
 [Contact me at markus@maragu.dk](mailto:markus@maragu.dk) for consulting work, or perhaps an invoice to support this project?
 
+## Usage
+
+Install skills with [npx skills](https://skills.sh):
+
+```shell
+npx skills add maragudk/skills
+```
+
 ## Available Skills
 
 - **bluesky** - Guide for posting content to the Bluesky social network using the bsky terminal app
