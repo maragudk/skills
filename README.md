@@ -8,6 +8,8 @@ Made with ✨sparkles✨ by [maragu](https://www.maragu.dev/): independent softw
 
 [Contact me at markus@maragu.dk](mailto:markus@maragu.dk) for consulting work, or perhaps an invoice to support this project?
 
+See also [evals-skills](https://github.com/maragudk/evals-skills) for skills related to LLM evaluation workflows.
+
 ## Usage
 
 Install skills with [npx skills](https://skills.sh):
