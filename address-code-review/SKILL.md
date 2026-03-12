@@ -17,9 +17,9 @@ Comments may come from:
 
 ## Process
 
-### 1. Gather comments
+### 1. Collect feedback
 
-- **GitHub PR**: Fetch inline comments with `gh api repos/{owner}/{repo}/pulls/{pr}/comments` and general comments with `gh api repos/{owner}/{repo}/issues/{pr}/comments`.
+- **GitHub PR**: Use GraphQL to fetch all comments in one go. Fetch inline review comments via `pullRequest.reviewThreads` and general PR comments via `pullRequest.comments`. Skip already-resolved threads (`isResolved`). Still present outdated but unresolved comments (`isOutdated`), noting to the user that the code has changed since the comment was left.
 - **Document**: Read the file and extract review items.
 - **Conversation**: Use the comments as provided.
 
@@ -46,8 +46,7 @@ For document sources: update the document with status/progress as appropriate.
 
 | Action | Command |
 |---|---|
-| List inline review comments | `gh api repos/{owner}/{repo}/pulls/{pr}/comments` |
-| List general PR comments | `gh api repos/{owner}/{repo}/issues/{pr}/comments` |
+| Fetch all comments | GraphQL query on `pullRequest.reviewThreads` (inline) and `pullRequest.comments` (general) |
 | Reply to inline comment | `gh api repos/{owner}/{repo}/pulls/{pr}/comments/{id}/replies -X POST -f body="..."` |
-| Get review thread node IDs | GraphQL query on `repository.pullRequest.reviewThreads` |
+| Reply to general comment | `gh api repos/{owner}/{repo}/issues/{pr}/comments -X POST -f body="..."` |
 | Resolve a thread | GraphQL mutation `resolveReviewThread(input: {threadId: "..."})` |
