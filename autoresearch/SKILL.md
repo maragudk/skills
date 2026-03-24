@@ -49,7 +49,16 @@ Ask: "Do you want to restrict which files I can modify, or is everything fair ga
 
 If the user provides a list of files or directories, only modify those. If they say everything is fair game, use your judgment based on the goal.
 
-### 6. Dry run
+### 6. Set up the autoresearch branch
+
+Create and push a dedicated `autoresearch` branch from the current branch (typically main). All experimentation happens on or from this branch -- main stays clean.
+
+```
+git checkout -b autoresearch
+git push -u origin autoresearch
+```
+
+### 7. Dry run
 
 Before starting the loop, run both the verify command and the guard command (if set) once. Confirm that:
 - The verify command succeeds and you can extract a numeric metric from its output
@@ -83,7 +92,7 @@ When stuck, don't just make tiny variations of the same idea. Try something radi
 
 ### 3. Branch
 
-Create a new branch from main with a descriptive name:
+Create a new branch from the `autoresearch` branch with a descriptive name:
 ```
 autoresearch/<short-description>
 ```
@@ -116,8 +125,8 @@ Run the guard command. It either passes (exit code 0) or fails. Only run this if
 
 Compare the metric to the current best (starting from the baseline established in the dry run):
 
-- **Metric improved AND guard passed** (or no guard): check out main, merge the experiment branch, and push main. This is now the new baseline.
-- **Metric did not improve, OR guard failed**: check out main. Leave the experiment branch as-is -- it serves as a record of what was tried.
+- **Metric improved AND guard passed** (or no guard): check out the `autoresearch` branch, merge the experiment branch, and push `autoresearch`. This is now the new baseline.
+- **Metric did not improve, OR guard failed**: check out the `autoresearch` branch. Leave the experiment branch as-is -- it serves as a record of what was tried.
 
 ### 9. Log
 
@@ -133,10 +142,10 @@ iteration	branch	metric	delta	guard	status	description
 - **metric**: the extracted metric value
 - **delta**: change from the current best metric (e.g., `-0.03` or `+12.5`)
 - **guard**: `pass`, `fail`, or `-` (no guard configured)
-- **status**: `kept` (merged to main) or `discarded` (branch left as-is)
+- **status**: `kept` (merged to `autoresearch`) or `discarded` (branch left as-is)
 - **description**: one-line summary of what the experiment tried
 
-Commit and push this file to main after each iteration so the log is always up to date.
+Commit and push this file to the `autoresearch` branch after each iteration so the log is always up to date.
 
 ### 10. Repeat
 
