@@ -77,7 +77,7 @@ Once the plan is confirmed, the loop runs autonomously. Never stop. Never ask. E
 Read the current state to inform your next experiment:
 - The in-scope files (or the relevant project files if no scope was set)
 - The results log (`autoresearch-results.tsv`) to see what's been tried
-- The experiment branches (`git branch -a | grep autoresearch/`) to recall past attempts
+- The experiment branches (`git branch -a | grep autoresearch-`) to recall past attempts
 
 This is your memory. The TSV tells you what worked and what didn't. The branches tell you what approaches have been explored. Use this to avoid repeating failed ideas and to build on successful ones.
 
@@ -94,9 +94,9 @@ When stuck, don't just make tiny variations of the same idea. Try something radi
 
 Create a new branch from the `autoresearch` branch with a descriptive name:
 ```
-autoresearch/<short-description>
+autoresearch-<short-description>
 ```
-Examples: `autoresearch/increase-batch-size`, `autoresearch/inline-hot-path`, `autoresearch/switch-to-radix-sort`
+Examples: `autoresearch-increase-batch-size`, `autoresearch-inline-hot-path`, `autoresearch-switch-to-radix-sort`
 
 ### 4. Modify
 
@@ -110,7 +110,7 @@ Commit with a descriptive message and push the branch:
 ```
 git add <specific files>
 git commit -m "autoresearch: <description of the change>"
-git push -u origin autoresearch/<short-description>
+git push -u origin autoresearch-<short-description>
 ```
 
 ### 6. Verify
