@@ -31,7 +31,6 @@ npx skills add maragudk/skills
 - **git** - Guide for using git according to preferences (branch naming, commit messages, issue references)
 - **go** - Guide for developing Go apps and modules/libraries (code style, testing, dependency injection, package structure)
 - **gomponents** - Guide for working with gomponents, a pure Go HTML component library for building HTML views
-- **journal** - Guide for using the AI's persistent journal database to capture insights and lessons learned
 - **marimo** - Guide for creating and working with marimo notebooks, the reactive Python notebook that stores as pure .py files
 - **nanobanana** - Guide for generating and editing images using generative AI with the nanobanana CLI
 - **observable-notebooks** - Guide for creating Observable Notebooks 2.0, the open-source notebook system for interactive data visualization
