@@ -1,6 +1,6 @@
 # skills
 
-<img src="logo.jpg" alt="Logo" width="300" align="right">
+<img src="logo.png" alt="Logo" width="300" align="right">
 
 Skills for AI agents.
 
