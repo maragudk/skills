@@ -1,5 +1,7 @@
 # skills
 
+> **Note:** Skills have moved to [maragudk/factory](https://github.com/maragudk/factory).
+
 <img src="logo.png" alt="Logo" width="300" align="right">
 
 Skills for AI agents.
